@@ -6,7 +6,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.template import loader
 from django.shortcuts import render
 from datetime import datetime
-#from ..models import 
+#from ..models import Class 
 from ..forms import ClassContasReceberForm
 
 # Create your views here.
