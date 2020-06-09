@@ -7,13 +7,17 @@ from django.template import loader
 from django.shortcuts import render
 from datetime import datetime
 #from ..models import 
-#from ..forms import ClassContasReceberForm
+from ..forms import ClassContasReceberForm
 
 # Create your views here.
+@csrf_exempt
 @require_http_methods(["GET","POST"])
 def home(request):
-	return HttpResponse("Olá, requisição feita com sucesso!")
-"""
+	template = loader.get_template('index.html')
+	context = {
+	}
+	return HttpResponse(template.render(context, request))
+
 @csrf_exempt
 @require_http_methods(["POST","GET"])
 def criar_classContasReceber(request):
@@ -25,8 +29,7 @@ def criar_classContasReceber(request):
 
 	if(form2.is_valid()):
 		form2.save()
-		return redirect('/')
+		return redirect('/financeiro')
 
 	template = loader.get_template('classContasReceber.html')
 	return HttpResponse(template.render(context, request))
-	"""
