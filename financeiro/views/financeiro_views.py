@@ -7,7 +7,7 @@ from django.template import loader
 from django.shortcuts import render
 from datetime import datetime
 #from ..models import Class 
-from ..forms import ClassContasReceberForm
+from ..forms import ClassContasReceberForm, ClassContasPagarForm, FormaPagamentoRecebimentoForm, ContasPagarForm, ContasReceberForm
 
 # Create your views here.
 @csrf_exempt
@@ -32,4 +32,68 @@ def criar_classContasReceber(request):
 		return redirect('/financeiro')
 
 	template = loader.get_template('classContasReceber.html')
+	return HttpResponse(template.render(context, request))
+
+@csrf_exempt
+@require_http_methods(["POST","GET"])
+def criar_classContasPagar(request):
+	form2 = ClassContasPagarForm(request.POST or None)
+
+	context = {
+		'form': ClassContasPagarForm(request.POST or None),
+	}
+
+	if(form2.is_valid()):
+		form2.save()
+		return redirect('/financeiro')
+
+	template = loader.get_template('classContasPagar.html')
+	return HttpResponse(template.render(context, request))
+
+@csrf_exempt
+@require_http_methods(["POST","GET"])
+def criar_formaPagamentoRecebimento(request):
+	form2 = FormaPagamentoRecebimentoForm(request.POST or None)
+
+	context = {
+		'form': FormaPagamentoRecebimentoForm(request.POST or None),
+	}
+
+	if(form2.is_valid()):
+		form2.save()
+		return redirect('/financeiro')
+
+	template = loader.get_template('formaPagamentoRecebimento.html')
+	return HttpResponse(template.render(context, request))
+
+@csrf_exempt
+@require_http_methods(["POST","GET"])
+def criar_ContasPagar(request):
+	form2 = ContasPagarForm(request.POST or None)
+
+	context = {
+		'form': ContasPagarForm(request.POST or None),
+	}
+
+	if(form2.is_valid()):
+		form2.save()
+		return redirect('/financeiro')
+
+	template = loader.get_template('contasPagar.html')
+	return HttpResponse(template.render(context, request))
+
+@csrf_exempt
+@require_http_methods(["POST","GET"])
+def criar_contasReceber(request):
+	form2 = ContasReceberForm(request.POST or None)
+
+	context = {
+		'form': ContasReceberForm(request.POST or None),
+	}
+
+	if(form2.is_valid()):
+		form2.save()
+		return redirect('/financeiro')
+
+	template = loader.get_template('contasReceber.html')
 	return HttpResponse(template.render(context, request))
