@@ -5,3 +5,14 @@ html {
 body {
     width: 50em;
 }
+
+.index {
+    border: gray;
+    border-radius: 10px;
+    border-style: solid;
+    width: 230px;
+    height: 180px;
+    padding: 1em;
+    padding-top: 0;
+    margin: 1em;
+}

@@ -6,7 +6,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.template import loader
 from django.shortcuts import render
 from datetime import datetime
-#from ..models import Class 
+from ..models import ClassContasReceber, ClassContasPagar, FormaPagamentoRecebimento, Situacao, ContasPagar, ContasReceber
 from ..forms import ClassContasReceberForm, ClassContasPagarForm, FormaPagamentoRecebimentoForm, ContasPagarForm, ContasReceberForm
 
 # Create your views here.
@@ -97,3 +97,93 @@ def criar_contasReceber(request):
 
 	template = loader.get_template('contasReceber.html')
 	return HttpResponse(template.render(context, request))
+
+@csrf_exempt
+@require_http_methods(["POST","GET"])
+def listar_classContasReceber(request):
+	result = ClassContasReceber.objects.all()
+	template = loader.get_template('listarClassContasReceber.html')
+	context = {
+		'lista' : result,
+	}
+	return HttpResponse(template.render(context, request))
+
+@csrf_exempt
+@require_http_methods(["POST","GET"])
+def listar_classContasPagar(request):
+	result = ClassContasPagar.objects.all()
+	template = loader.get_template('listarClassContasPagar.html')
+	context = {
+		'lista' : result,
+	}
+	return HttpResponse(template.render(context, request))
+
+@csrf_exempt
+@require_http_methods(["POST","GET"])
+def listar_formaPagamentoRecebimento(request):
+	result = FormaPagamentoRecebimento.objects.all()
+	template = loader.get_template('listarFormaPagamentoRecebimento.html')
+	context = {
+		'lista' : result,
+	}
+	return HttpResponse(template.render(context, request))
+
+@csrf_exempt
+@require_http_methods(["POST","GET"])
+def listar_ContasPagar(request):
+	result = ContasPagar.objects.all()
+	template = loader.get_template('listarContasPagar.html')
+	context = {
+		'lista' : result,
+	}
+	return HttpResponse(template.render(context, request))
+
+@csrf_exempt
+@require_http_methods(["POST","GET"])
+def listar_contasReceber(request):
+	result = ContasReceber.objects.all()
+	template = loader.get_template('listarContasReceber.html')
+	context = {
+		'lista' : result,
+	}
+	return HttpResponse(template.render(context, request))
+
+def excluir_classContasReceber(request, id_item):
+	try:
+		item = ClassContasReceber.objects.get(id=id_item)
+		item.delete()		
+		return HttpResponse(f"Excluiu {item.descricao} (id={item.id})")
+	except ObjectDoesNotExist:
+		return HttpResponse("Item não encontrado")
+
+def excluir_classContasPagar(request, id_item):
+	try:
+		item = ClassContasPagar.objects.get(id=id_item)
+		item.delete()		
+		return HttpResponse(f"Excluiu {item.descricao} (id={item.id})")
+	except ObjectDoesNotExist:
+		return HttpResponse("Item não encontrado")
+	
+def excluir_formaPagamentoRecebimento(request, id_item):
+	try:
+		item = FormaPagamentoRecebimento.objects.get(id=id_item)
+		item.delete()		
+		return HttpResponse(f"Excluiu {item.descricao} (id={item.id})")
+	except ObjectDoesNotExist:
+		return HttpResponse("Item não encontrado")
+
+def excluir_contasPagar(request, id_item):
+	try:
+		item = ContasPagar.objects.get(id=id_item)
+		item.delete()		
+		return HttpResponse(f"Excluiu {item.descricao} (id={item.id})")
+	except ObjectDoesNotExist:
+		return HttpResponse("Item não encontrado")
+
+def excluir_contasReceber(request, id_item):
+	try:
+		item = ContasReceber.objects.get(id=id_item)
+		item.delete()		
+		return HttpResponse(f"Excluiu {item.descricao} (id={item.id})")
+	except ObjectDoesNotExist:
+		return HttpResponse("Item não encontrado")

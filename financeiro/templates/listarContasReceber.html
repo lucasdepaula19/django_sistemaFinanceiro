@@ -1,0 +1,17 @@
+{% load static %}
+<h1>Lista de Contas a Receber</h1>
+{% if lista %}
+	<ul>
+        {% for item in lista %}
+            <li>
+                {{item}}
+                <a href="{% url 'excluir_contasReceber' item.id %}">
+				<img src="{% static 'excluir.png' %}" width="20" height="20">
+			</a>
+            </li>
+        {% endfor %}
+	</ul>
+{% else %}
+	<p>Não há itens cadastradas</p>
+{% endif %}
+<a href="{% url 'index' %}" ><span>Voltar</span></a>
