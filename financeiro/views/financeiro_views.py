@@ -187,3 +187,31 @@ def excluir_contasReceber(request, id_item):
 		return HttpResponse(f"Excluiu {item.descricao} (id={item.id})")
 	except ObjectDoesNotExist:
 		return HttpResponse("Item não encontrado")
+
+@csrf_exempt
+@require_http_methods(["POST","GET"])
+def filter_pagar(request):
+	data_1 = request.POST['data_1']
+	data_2 = request.POST['data_2']
+
+	result = ContasPagar.objects.filter(data_vencimento__range=(data_1, data_2))
+
+	template = loader.get_template('listarContasPagarFilter.html')
+	context = {
+		'lista' : result,
+	}
+	return HttpResponse(template.render(context, request))
+
+@csrf_exempt
+@require_http_methods(["POST","GET"])
+def filter_receber(request):
+	data_1 = request.POST['data_1']
+	data_2 = request.POST['data_2']
+
+	result = ContasReceber.objects.filter(data_expectativa__range=(data_1, data_2))
+
+	template = loader.get_template('listarContasReceberFilter.html')
+	context = {
+		'lista' : result,
+	}
+	return HttpResponse(template.render(context, request))

@@ -21,4 +21,7 @@ urlpatterns = [
     path('excluirFormaPagamentoRecebimento/<int:id_item>/', fv.excluir_formaPagamentoRecebimento, name="excluir_formaPagamentoRecebimento"),
     path('excluirContasPagar/<int:id_item>/', fv.excluir_contasPagar, name="excluir_contasPagar"),
     path('excluirContasReceber/<int:id_item>/', fv.excluir_contasReceber, name="excluir_contasReceber"),
+
+    path('listarContasPagar/filterPagar/', fv.filter_pagar, name="filter_pagar"),
+    path('listarContasReceber/filterReceber/', fv.filter_receber, name="filter_receber"),
 ]

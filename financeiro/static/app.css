@@ -1,9 +1,9 @@
 html {
-    background: rgb(211, 212, 203);
 }
 
 body {
-    width: 50em;
+    background: rgb(218, 236, 216);
+    margin: 50px;
 }
 
 .index {
